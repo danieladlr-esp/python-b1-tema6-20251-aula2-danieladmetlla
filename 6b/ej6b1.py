@@ -53,7 +53,7 @@ Exemple:
      Entrada:
          ["Juan", "Pedro", "Marta"]
      Sortida:
-        Existeix un fitxer "production.log" que conté:
+        Existeix un fitxer "proudction.log" que conté:
         DEBUG:root:Letter counts: {'J': 1, 'u': 1, 'a': 3, 'n': 1, 'P': 1, 'e': 1, 'd': 1, 'r': 2, 'o': 1, 'M': 1, 't': 1}
 
 Nota: Verifiqueu que el fitxer de logs s'hagi creat.
@@ -62,14 +62,21 @@ import logging
 
 def count_letters(names):
     #Write your code here
-    pass
+    letters = {}
+    for name in names:
+        for char in name:
+            if char in letters.keys():
+                letters[char] += 1
+            else:
+                letters[char] = 1
+    return letters
 
 
 def create_log(names):
-    #Write your code here
-    pass
+    logging.basicConfig(filename='production.log', level=logging.DEBUG)
+    logging.debug("Letter counts: " + str(count_letters(names)))
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
 # Si vols provar el teu codi, descomenta les línies següents i executa l'script
-# create_log(["Juan", "Pedro", "Marta"])
+create_log(["Juan", "Pedro", "Marta"])

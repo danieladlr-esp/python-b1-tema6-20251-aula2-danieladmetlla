@@ -76,21 +76,33 @@ Exemple:
 
 
 def read_txt_file(path: str) -> str:
-    #Write your code here
-    pass
+    file = open(path, "r", encoding="utf-8")
+    content = file.read()
+    text = ""
+
+    for line in content:
+        text += line
+    file.close()
+
+    return text
 
 
 def words_counter(text: str, word: str) -> int:
-    #Write your code here
-    pass
+    counter = 0
+    if word.lower() in text.lower():
+        textList = text.split(" ")
+        for textWord in textList:
+            if textWord.lower() == word.lower():
+                counter += 1
+    return counter
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
 # Si vols provar el teu codi, descomenta les línies següents i executa l'script
-# path = "files/ej6c2_data_engineer.txt"
-# text = read_txt_file(path)
-# print(text[-25:])
+path = "6c/files/ej6c2_data_engineer.txt"
+text = read_txt_file(path)
+print(text[-25:])
 
-# word = "data"
-# count = words_counter(text, word)
-# print(f"The word '{word}' appears {count} times in the text.")
+word = "data"
+count = words_counter(text, word)
+print(f"The word '{word}' appears {count} times in the text.")
