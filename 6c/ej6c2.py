@@ -73,24 +73,46 @@ Exemple:
          4
 
 """
+from util_package import text_manager
+
+remove_punct = text_manager.remove_punctuation_marks
 
 
 def read_txt_file(path: str) -> str:
     #Write your code here
-    pass
-
+    with open('files/ej6c2_data_engineer.txt',"r",encoding="utf-8") as file:
+        read = file.read()
+    return read
 
 def words_counter(text: str, word: str) -> int:
     #Write your code here
-    pass
-
+    listado = [] 
+    palabra = ""
+    
+    for i in text:
+        if i == " " or i == "\n":
+            listado.append(palabra)
+            palabra = ""
+        else:
+            clean = remove_punct(i)
+            palabra += clean.lower()
+    print(listado)
+    listado.append(palabra)
+    
+    resultado = 0
+    for i in listado:
+        if i.lower() == word.lower():
+            resultado += 1
+    
+    return resultado
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
 # Si vols provar el teu codi, descomenta les línies següents i executa l'script
-# path = "files/ej6c2_data_engineer.txt"
-# text = read_txt_file(path)
-# print(text[-25:])
-
-# word = "data"
-# count = words_counter(text, word)
-# print(f"The word '{word}' appears {count} times in the text.")
+path = "files/ej6c2_data_engineer.txt"
+text = read_txt_file(path)
+#print(text[-25:])
+#print(text)
+#text = "The quick brown fox jumps over the lazy dog."
+word = "Data"
+count = words_counter(text, word)
+print(f"The word '{word}' appears {count} times in the text.")

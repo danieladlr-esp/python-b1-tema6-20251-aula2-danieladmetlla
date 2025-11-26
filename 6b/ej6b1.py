@@ -59,17 +59,50 @@ Exemple:
 Nota: Verifiqueu que el fitxer de logs s'hagi creat.
 """
 import logging
+import os
 
 def count_letters(names):
-    #Write your code here
-    pass
+    
+    res = {}
+
+    for i in names:
+        for e in i:
+            if e in res:
+                res[e] +=1
+            else:
+                res[e] = 1
+    
+    return res
+    
+    
 
 
 def create_log(names):
     #Write your code here
-    pass
+    
+    logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filename="production.log",
+    filemode="w"
+    )
+
+    logger = logging.getLogger(__name__)
+
+    letter_counts = count_letters(names)
+    actual_dir = os.listdir()
+
+    if "production.log" in actual_dir:
+        return True
+    else:
+        logger.debug(count_letters(names))
+        logging.info(f'Letter counts: {letter_counts}')
+
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
 # Si vols provar el teu codi, descomenta les línies següents i executa l'script
-# create_log(["Juan", "Pedro", "Marta"])
+print(create_log(["Juan", "Pedro", "Marta"]))
+
+print(count_letters(["Juan","Pedra"]))
+

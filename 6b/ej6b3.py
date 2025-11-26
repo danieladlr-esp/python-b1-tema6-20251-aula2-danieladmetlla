@@ -65,23 +65,24 @@ from typing import List
 
 def isprime(num):
     #Find the error and rewrite the correct code. 
-    if num < 1:
+    if num <= 1:
         return False
-    for i in range(2, num):
-        if num % i != 0:
-            return False
-    return True
+    count = 0
+    for i in range(1,num+1):
+        if num % i == 0:
+            count +=1
+    return count == 2
 
 
 def check_primes(nums: List[int]) -> List[bool]:
     #Find the error and rewrite the correct code. 
     results = []
-    for i in range(1, len(nums)):
+    for i in nums:
         results.append(isprime(i))
     return results
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
 # Si vols provar el teu codi, descomenta les línies següents i executa l'script
-#numbers_list = [1, 5, 11, 12, 13, 14, 15]
-#print(check_primes(numbers_list))
+numbers_list = [1, 2, 4, 7, 11, 12, 13, 14, 15]
+print(check_primes(numbers_list))
