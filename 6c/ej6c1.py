@@ -67,11 +67,22 @@ Exemple:
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-nltk.download("vader_lexicon")
+nltk.download("vader_lexicon", quiet=True)
 
 def sentiment_analysis(text):
-    #Write your code here
-    pass
+    sia = SentimentIntensityAnalyzer()
+    scores = sia.polarity_acores(text)
+    compound_score = scores["compound"]
+
+    if compound_scores > 0.05:
+        return "Positive"
+
+    elif compound_score < -0.05:
+        return "Negative"
+
+    else:
+        return "Neutral"
+    
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
